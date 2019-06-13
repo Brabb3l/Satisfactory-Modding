@@ -4,6 +4,8 @@ FactoryGame is an unreal engine project
 PAKer packs your assets into a pak file  
 SMI is a c++ project for testing purposes.  
 
+All assets/code related to satisfactory are under copyright for Coffee Stain Studios!  
+
 ## Instructions
 
 #### Creating a new Item  
