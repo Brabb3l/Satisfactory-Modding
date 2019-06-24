@@ -47,6 +47,7 @@ class FACTORYGAME_API AFGBuildGuide : public AActor
 {
 	GENERATED_BODY()
 
+public:
 	/** Defines what type of build guide line this is. */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "BuildGuides")
 		EGuideLineType mGuideLineType;
@@ -54,7 +55,4 @@ class FACTORYGAME_API AFGBuildGuide : public AActor
 protected:
 	class UStaticMeshComponent* mMeshComponent;
 	class UStaticMesh* mBuildGuideMesh;
-
-private:
-
 };
