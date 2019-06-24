@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #include "dllmain.h"
+#include "ChatSystem.h"
 
 using namespace SMI;
 
