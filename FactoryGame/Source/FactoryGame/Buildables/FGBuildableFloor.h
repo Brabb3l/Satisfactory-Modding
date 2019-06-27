@@ -14,6 +14,9 @@ class FACTORYGAME_API AFGBuildableFloor : public AFGBuildableFactoryBuilding
 {
 	GENERATED_BODY()
 public:
+	AFGBuildableFloor();
+
+public:
 	/** Size of the floor, width and depth. */
 	UPROPERTY( EditDefaultsOnly, BlueprintReadOnly, Category = "Foundation" )
 	float mSize;

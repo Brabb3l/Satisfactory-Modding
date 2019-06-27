@@ -15,4 +15,39 @@ UCLASS()
 class FACTORYGAME_API AFGEquipmentChild : public AActor
 {
 	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
+	AFGEquipmentChild();
+
+	// Begin AActor interface
+	virtual void BeginPlay() override;
+	// End AActor interface
+
+	/** Called by Equipable parent when it is equipped */
+	virtual void Equip( class AFGCharacterPlayer* character, class AFGEquipment* parentEquipment );
+	/** Called by UnEquip parent when it is unequiped */
+	virtual void UnEquip();
+
+	/** Called by after equip has run allowing for blueprint functionality */
+	UFUNCTION( BlueprintNativeEvent, Category = "Equipment" )
+	void OnEquip( class AFGCharacterPlayer* character );
+
+	/** Called by after Unequip has run allowing for blueprint functionality */
+	UFUNCTION( BlueprintNativeEvent, Category = "Equipment" )
+	void OnUnEquip( );
+
+	UFUNCTION( BlueprintCallable, Category = "Equipment" )
+	FTransform GetAttachSocketTransform();
+
+protected:
+	/** stores a reference to the FGEquipment that spawned this class */
+	UPROPERTY( BlueprintReadOnly, Category = "Equipment" )
+	class AFGEquipment* mParentEquipment;
+
+private:
+	/** The socket to attach any child equipment to */
+	UPROPERTY( EditDefaultsOnly, Category = "Equipment" )
+	FName mAttachSocket;
+	
 };

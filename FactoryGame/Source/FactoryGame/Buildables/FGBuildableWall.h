@@ -8,16 +8,19 @@
 /**
  * A wall that can be build on foundations, floors and other walls.
  */
-UCLASS(Abstract)
+UCLASS( Abstract )
 class FACTORYGAME_API AFGBuildableWall : public AFGBuildableFactoryBuilding
 {
 	GENERATED_BODY()
 public:
+	AFGBuildableWall();
+
+public:
 	/** Width of the wall */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Wall")
-		float mWidth;
+	UPROPERTY( EditDefaultsOnly, BlueprintReadOnly, Category = "Wall" )
+	float mWidth;
 
 	/** Height of the wall */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Wall")
-		float mHeight;
+	UPROPERTY( EditDefaultsOnly, BlueprintReadOnly, Category = "Wall" )
+	float mHeight;
 };

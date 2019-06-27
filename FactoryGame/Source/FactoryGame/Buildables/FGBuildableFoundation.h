@@ -12,6 +12,9 @@ UCLASS(Abstract)
 class FACTORYGAME_API AFGBuildableFoundation : public AFGBuildableFactoryBuilding
 {
 	GENERATED_BODY()
+protected:
+	AFGBuildableFoundation();
+
 public:
 	/** Size of the foundation (size of one side of the square). */
 	UPROPERTY( EditDefaultsOnly, BlueprintReadOnly, Category = "Foundation" )

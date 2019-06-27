@@ -13,4 +13,8 @@ UCLASS()
 class FACTORYGAME_API UFGBuildSubCategory : public UFGBuildCategory
 {
 	GENERATED_BODY()
+	
+	
+	
+	
 };
