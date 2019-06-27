@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Resources/FGItemDescriptor.h"
+#include "SubclassOf.h"
 #include "ItemAmount.generated.h"
 
 /**
@@ -27,10 +28,13 @@ struct FItemAmount
 	}
 
 	/** The item. */
-	UPROPERTY( BlueprintReadWrite, EditAnywhere, Category = "Item" )
+	UPROPERTY( SaveGame, BlueprintReadWrite, EditAnywhere, Category = "Item" )
 	TSubclassOf< class UFGItemDescriptor > ItemClass;
 
 	/** The amount of this item. */
-	UPROPERTY( BlueprintReadWrite, EditAnywhere, Category = "Item", meta = ( ClampMin = 0 ) )
+	UPROPERTY( SaveGame, BlueprintReadWrite, EditAnywhere, Category = "Item", meta = ( ClampMin = 0 ) )
 	int32 Amount;
 };
+
+FORCEINLINE bool IsValidForLoad( const FItemAmount& element ){ return element.ItemClass != nullptr; }
+FORCEINLINE FString VarToFString( const FItemAmount& var ){ return FString::Printf( TEXT( "Num: %i [%s]" ), var.Amount, *VarToFString(var.ItemClass) ); }

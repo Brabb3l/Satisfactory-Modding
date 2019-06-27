@@ -14,6 +14,22 @@ class FACTORYGAME_API AFGConveyorAttachmentHologram : public AFGFactoryHologram
 {
 	GENERATED_BODY()
 public:
+	AFGConveyorAttachmentHologram();
+
+	// Begin AFGHologram Interface
+	virtual void SetHologramLocationAndRotation( const FHitResult& hitResult ) override;
+	virtual bool TrySnapToActor( const FHitResult& hitResult ) override;
+	// End AFGHologram Interface
+
+protected:
+	// Begin AFGBuildableHologram Interface
+	virtual void ConfigureComponents( class AFGBuildable* inBuildable ) const override;
+	virtual void CheckValidPlacement() override;
+	// End AFGBuildableHologram Interface
+
+	virtual FVector GetGuideLinesBaseLocation() override;
+
+public:
 	/** Name of the pass through input connection. */
 	static FName mInputConnection1;
 

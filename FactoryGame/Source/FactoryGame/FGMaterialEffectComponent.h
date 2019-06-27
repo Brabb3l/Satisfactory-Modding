@@ -34,12 +34,75 @@ class FACTORYGAME_API UFGMaterialEffectComponent : public UActorComponent
 {
 	GENERATED_BODY()
 public:
+	UFGMaterialEffectComponent();
+
+	// Begin AActorComponent interface
+	virtual void OnUnregister() override;
+	virtual void Activate( bool reset ) override;
+	virtual void Deactivate() override;
+	virtual void TickComponent( float deltaTime, ELevelTick tickType, FActorComponentTickFunction* thisTickFunction) override;
+	// End ActorComponent interface
+
+	void Start();
+	void Stop();
+
+	/** Set the meshes to override material on, cannot be called after PreStarted. */
+	UFUNCTION( BlueprintCallable )
+	void SetMeshes( TArray< UMeshComponent* > meshes );
+
+	/** Get the meshes which have the overridden material. */
+	UFUNCTION( BlueprintCallable, BlueprintPure = false )
+	TArray< UMeshComponent* > GetMeshes() const { return mMeshes; };
+
+	/** Get the bounds of the meshes. */
+	UFUNCTION( BlueprintCallable, BlueprintPure = false )
+	void GetMeshesBounds( bool onlyVisible, bool onlyColliding, FVector& out_origin, FVector& out_boxExtent ) const;
+
+	/** Set the duration for this effect [seconds]. This is not replicated. */
+	UFUNCTION( BlueprintCallable )
+	void SetDuration( float duration ) { mDuration = duration; }
+
+	/** Get the duration for this effect. [seconds] */
+	UFUNCTION( BlueprintPure )
+	FORCEINLINE float GetDuration() const { return mDuration; }
+
+	FORCEINLINE void SetAutoDestroy( bool autoDestroy ) { mAutoDestroy = autoDestroy; }
+
+protected:
+	/** Called prior to the build effect starting and before the materials have been overridden. */
+	UFUNCTION( BlueprintNativeEvent, Category = "Material Effect" )
+	void PreStarted();
+
+	/** Called when the effect has been started and the materials have been overridden. */
+	UFUNCTION( BlueprintNativeEvent, Category = "Material Effect" )
+	void OnStarted();
+
+	/** Called when the effect has ended and the material overrides have been cleared. */
+	UFUNCTION( BlueprintNativeEvent, Category = "Material Effect" )
+	void OnEnded();
+
+	/** Called when the effect is updated. */
+	UFUNCTION( BlueprintNativeEvent, Category = "Material Effect" )
+	void OnUpdate( float deltaTime );
+
+	/** Set a scalar parameter on the effect. */
+	UFUNCTION( BlueprintCallable, Category = "Material Effect Parameter" )
+	void SetMaterialScalarParameterValue( FName name, float value );
+
+private:
+	void InitializeMaterials();
+	void FinalizeMaterials();
+
+public:
+	/** Delegates */
+	DECLARE_DELEGATE( FMaterialEffectStarted );
+	DECLARE_DELEGATE( FMaterialEffectEnded );
 
 	/** Called when material effect has finished. */
-	void* mOnStarted;
+	FMaterialEffectStarted mOnStarted;
 
 	/** Called when material effect has finished. */
-	void* mOnEnded;
+	FMaterialEffectEnded mOnEnded;
 
 protected:
 	/** Meshes affected by the material effect. */

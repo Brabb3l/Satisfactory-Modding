@@ -12,6 +12,22 @@ UCLASS()
 class FACTORYGAME_API AFGFoundationHologram : public AFGFactoryBuildingHologram
 {
 	GENERATED_BODY()
+public:
+	AFGFoundationHologram();
+
+	// Begin AActor interface
+	virtual void BeginPlay() override;
+	// End AActor interface
+
+	// Begin AFGHologram interface
+	virtual bool TrySnapToActor( const FHitResult& hitResult ) override;
+	// End AFGHologram interface
+
+	// Begin AFGBuildableHologram interface
+	virtual void ConfigureSnappedBuilding( class AFGBuildable* inBuildable ) const override;
+	virtual void CheckValidFloor() override;
+	// End AFGBuildableHologram interface
+
 protected:
 	/** Size of the foundation, from the default buildable. */
 	float mSize;

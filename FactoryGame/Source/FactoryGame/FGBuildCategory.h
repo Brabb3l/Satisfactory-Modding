@@ -14,6 +14,16 @@ UCLASS( Blueprintable )
 class FACTORYGAME_API UFGBuildCategory : public UObject
 {
 	GENERATED_BODY()
+	
+public:
+	/** Used to get the mDisplayName in blueprint. */
+	UFUNCTION( BlueprintPure, Category = "Build Category" )
+	static FText GetCategoryName( TSubclassOf< UFGBuildCategory > inClass );
+
+	/** Get the icon for a category */
+	UFUNCTION( BlueprintPure, Category = "Build Category" )
+	static FSlateBrush GetCategoryIcon( TSubclassOf< UFGBuildCategory > inClass );
+
 private:
 	/** Name of this build category*/
 	UPROPERTY( EditDefaultsOnly, Category = "Build Category" )
